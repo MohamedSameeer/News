@@ -7,6 +7,7 @@ import 'package:news/modules/settings/settings.dart';
 import 'package:news/modules/sports/sports.dart';
 import 'package:news/share/cubit/news_states.dart';
 import 'file:///E:/AndroidProject/flutter/news/lib/share/network/remote/dio_helper.dart';
+import 'package:news/share/network/local/cash_helper.dart';
 
 class NewsCubit extends Cubit<NewsStates>{
 
@@ -97,9 +98,11 @@ class NewsCubit extends Cubit<NewsStates>{
 
   // Change Theme
 
-  bool isDark=false;
+  bool isDark=CashHelper.getData("isDark")==null?false:CashHelper.getData("isDark");
   void changeDarkMode(){
     isDark= !isDark;
-    emit(ChangeThemeState());
+    CashHelper.setBool(key: "isDark", value: isDark).then((value) {
+      emit(ChangeThemeState());
+    });
   }
 }

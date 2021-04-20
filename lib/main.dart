@@ -8,9 +8,13 @@ import 'package:news/share/component/state_observer.dart';
 import 'package:news/share/cubit/news_cubit.dart';
 import 'package:news/share/cubit/news_states.dart';
 import 'file:///E:/AndroidProject/flutter/news/lib/share/network/remote/dio_helper.dart';
+import 'package:news/share/network/local/cash_helper.dart';
 
-void main() {
+void main() async{
+  WidgetsFlutterBinding.ensureInitialized();
   Bloc.observer = MyBlocObserver();
+  DioHelper.init();
+  await CashHelper.init();
   runApp(MyApp());
 }
 
@@ -18,7 +22,6 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    DioHelper.init();
     return BlocProvider(
       create: (BuildContext context) => NewsCubit(),
       child: BlocConsumer<NewsCubit,NewsStates>(
