@@ -14,14 +14,7 @@ class Business extends StatelessWidget {
       builder: (context, state) {
         var list=cubit.business;
         return state is! LoadingState
-            ? ListView.separated(
-                itemBuilder: (context, index) => itemList(context: context,articles: list[index]),
-                separatorBuilder: (context, index) => Container(
-                  width: double.infinity,
-                  height: 1,
-                  color: Colors.grey[300],
-                ),
-                itemCount: cubit.business.length)
+            ? itemList(articles: list,context: context)
             : Center(
                 child: CircularProgressIndicator(),
               );

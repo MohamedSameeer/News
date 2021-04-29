@@ -14,14 +14,7 @@ class Sports extends StatelessWidget {
       builder: (context, state) {
         var list=cubit.sports;
         if (state is! LoadingState) {
-          return ListView.separated(
-            itemBuilder: (context, index) => itemList(context: context,articles: list[index]),
-            separatorBuilder: (context, index) => Container(
-              width: double.infinity,
-              height: 1,
-              color: Colors.grey[300],
-            ),
-            itemCount: cubit.business.length);
+          return itemList(articles: list,context: context);
         } else {
           return Center(
           child: CircularProgressIndicator(),

@@ -24,7 +24,24 @@ class NewsCubit extends Cubit<NewsStates>{
     emit(ScreenChangeState());
   }
 
-  
+  //Search
+  List search=[];
+  void getSearchData(String word){
+    DioHelper.getData(
+        path:"/v2/everything",
+        query:{
+          'q':word,
+          "apiKey":"803c950feec64958b66674fcaeeff457",
+        }
+    ).then((value){
+      search=value.data['articles'];
+      print(value.data['articles']);
+      emit(GetSearchDataState());
+    }).catchError((onError){
+      print("Error on search: ${onError.toString()}");
+    }
+    );
+  }
   //Get data from api
   List business=[];
   List sports=[];
@@ -32,7 +49,7 @@ class NewsCubit extends Cubit<NewsStates>{
   void getBusinessData(){
     if(business.length==0){
       emit(LoadingState());
-      DioHelper.getDate(
+      DioHelper.getData(
           path: "/v2/top-headlines",
           query:{
             "category":"business",
@@ -54,7 +71,7 @@ class NewsCubit extends Cubit<NewsStates>{
   void getScienceData(){
     if(science.length==0){
       emit(LoadingState());
-      DioHelper.getDate(
+      DioHelper.getData(
           path: "/v2/top-headlines",
           query:{
             "category":"science",
@@ -76,7 +93,7 @@ class NewsCubit extends Cubit<NewsStates>{
   void getSportData(){
     if(sports.length==0){
       emit(LoadingState());
-      DioHelper.getDate(
+      DioHelper.getData(
           path: "/v2/top-headlines",
           query:{
             "category":"sport",
