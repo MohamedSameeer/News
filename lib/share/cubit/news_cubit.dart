@@ -115,7 +115,7 @@ class NewsCubit extends Cubit<NewsStates>{
 
   // Change Theme
 
-  bool isDark=CashHelper.getData("isDark")==null?false:CashHelper.getData("isDark");
+  bool isDark=CashHelper.getIsDark("isDark")==null?false:CashHelper.getIsDark("isDark");
   void changeDarkMode(){
     isDark= !isDark;
     CashHelper.setBool(key: "isDark", value: isDark).then((value) {

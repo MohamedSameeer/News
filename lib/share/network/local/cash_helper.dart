@@ -16,7 +16,7 @@ class CashHelper{
     return await sharedPreferences.setBool(key, value);
   }
 
-  static bool getData(String key){
+  static bool getIsDark(String key){
     return sharedPreferences.getBool(key);
   }
 }
